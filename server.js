@@ -1,5 +1,5 @@
 const express = require("express");
-const rateioRoutes = require('./src_rateio/routes');
+// const rateioRoutes = require('./src_rateio/routes');
 
 const app = express();
 const port = 3000;
@@ -9,6 +9,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
+
+app.get('/manifest.json', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'manifest.json'));
+});
+
 
 app.post("/pubsub", (req, res) => {
     const pubsubMessage = req.body.message;
@@ -28,7 +33,7 @@ app.post("/pubsub", (req, res) => {
     }
 });
 
-app.use("/api/v1/rateio", rateioRoutes);
+// app.use("/api/v1/rateio", rateioRoutes);
 
 
 app.listen(port, () => console.log("okokoko"));
