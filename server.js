@@ -20,6 +20,14 @@ app.get('/manifest.json', (req, res) => {
     res.sendFile(filePath);
 });
 
+app.get('/index.html', (req, res) => {
+    // Construct the full path to the manifest.json file
+    const filePath = path.join(publicDir, 'index.html');
+    res.sendFile(filePath);
+});
+
+
+
 app.post("/pubsub", (req, res) => {
     const pubsubMessage = req.body.message;
     console.log(req.body)
@@ -41,4 +49,4 @@ app.post("/pubsub", (req, res) => {
 // app.use("/api/v1/rateio", rateioRoutes);
 
 
-app.listen(port, () => console.log("okokoko"));
+app.listen(port, () => console.log("Api online!"));
