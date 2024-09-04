@@ -3,6 +3,7 @@ const express = require("express");
 
 const app = express();
 const port = 3000;
+const path = require('path');
 
 app.use(express.json());
 
@@ -10,10 +11,14 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
-app.get('/manifest.json', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'manifest.json'));
-});
+const publicDir = path.join('C:', 'Users', 'Evandro', 'Desktop', 'git', 'pipefy', 'public');
 
+// Define a GET endpoint for '/manifest.json'
+app.get('/manifest.json', (req, res) => {
+    // Construct the full path to the manifest.json file
+    const filePath = path.join(publicDir, 'manifest.json');
+    res.sendFile(filePath);
+});
 
 app.post("/pubsub", (req, res) => {
     const pubsubMessage = req.body.message;
